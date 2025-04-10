@@ -1,5 +1,5 @@
 import express from "express";
-import Task from "../schemas/todo.schemas";
+import Task from "../schemas/todo.schemas.js";
 
 export const router = express.Router()
 
