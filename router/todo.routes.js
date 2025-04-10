@@ -3,10 +3,10 @@ import Task from "../schemas/todo.schemas.js";
 
 export const router = express.Router()
 
-router.get("/", async (req, res) => {
+router.get("/", async (_, res) => {
     try {
         const tasks = await Task.find({isDelete:false})
-        if (tasks[0]) {
+        if (!tasks[0]) {
             return res.status(400).send({ message: "tasks not found" })
         }
         return res.status(200).send({ tasks })
