@@ -19,7 +19,7 @@ router.get("/:id", async (req, res) => {
         const { id } = req.params
         const task = await Task.findOne({isDelete:false, _id:id})
         
-        if (task) {
+        if (!task) {
             return res.status(400).send({ message: "task not found" })
         }
         
