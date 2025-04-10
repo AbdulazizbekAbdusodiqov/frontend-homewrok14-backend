@@ -47,3 +47,27 @@ router.delete("/:id", async (req, res) => {
         return res.status(400).send({ error: error.message })
     }
 })
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title } = req.body;
+  
+    if (!title || !title.trim()) {
+      return res.status(400).json({ error: 'Title bo‘sh bo‘lishi mumkin emas!' });
+    }
+  
+    try {
+      const updatedTask = await Task.findByIdAndUpdate(
+        id,
+        { title: title.trim() },
+        { new: true }
+      );
+  
+      if (!updatedTask) {
+        return res.status(404).json({ error: 'Task topilmadi' });
+      }
+  
+      res.json(updatedTask);
+    } catch (error) {
+      res.status(500).json({ error: 'Serverda xatolik yuz berdi' });
+    }
+  });
